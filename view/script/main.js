@@ -12,7 +12,7 @@ const vmMain = new Vue({
     posts: [],
     // branch info
     branchCount: 0,
-    branchs: [],
+    branches: [],
     // comment info
     allCommentCount: 0,
     commentCount: 0,
@@ -29,15 +29,12 @@ const vmMain = new Vue({
   methods: {
     toggleTextbox: function () {
       this.showSubform = this.showSubform != 1 ? 1 : 0
-      //
     },
     toggleBranch: function () {
       this.showSubform = this.showSubform != 2 ? 2 : 0
-      //
     },
     toggleComment: function () {
       this.showSubform = this.showSubform != 3 ? 3 : 0
-      //
     },
     contentChanged: function () {
       this.restLength = 300 - getWordCount(this.content)
@@ -49,19 +46,10 @@ const vmMain = new Vue({
       console.log(this.remember)
     },
     branchArrowClicked: function (isLeft) {
-      let container = document.getElementById('panel-container')
-      let panel = document.querySelectorAll('.post-branch .panel')
-      if (!panel.length) return
-      let left = container.offsetLeft
-      let offset = container.offsetWidth / panel.length
-      left += offset * (isLeft ? 1 : -1)
-      if (left > 0) {
-        left = 0
+      if (moveBranchPanel(isLeft)) {
+        // load more branch info
+        getMoreBranchInfo(this)
       }
-      else if (left < -offset * (panel.length - 1)) {
-        left = -offset * (panel.length - 1)
-      }
-      container.style.left = left + 'px'
     },
     branchPanelClicked: function (index) {
       //
@@ -74,9 +62,14 @@ const vmMain = new Vue({
     },
   },
   created: async function () {
-    // initializer
-    window.onscroll = checkScroll(() => console.log('bottom'), 100)
+    // initialize scroll detector
+    if (fromRoot) {
+      window.onscroll = checkScroll(() => getPostInfo(this), 100)
+    }
+    // get info from server
     await getPathInfo(this)
-    await getPostInfo(this)
+    getPostInfo(this)
+    getBranchInfo(this)
+    getCommentInfo(this)
   },
 })
