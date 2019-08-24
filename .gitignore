@@ -40,3 +40,6 @@ debug
 # html files
 *.htm
 *.html
+
+# Photoshop documents
+*.psd
