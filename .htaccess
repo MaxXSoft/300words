@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /Lab/300words/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]
