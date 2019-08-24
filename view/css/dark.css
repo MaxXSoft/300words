@@ -1,0 +1,117 @@
+/* main area */
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background-color: black;
+  }
+
+  #top-container {
+    background-color: #303030;
+    color: #c0c0c0;
+    box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.25);
+    -moz-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  #logo {
+    background-image: url('../image/icon-152-dark.png');
+  }
+
+  #site-name {
+    margin: 0 10px;
+    color: #009c27;
+  }
+
+  .post-box {
+    background-color: #303030;
+    color: #c0c0c0;
+    box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.15);
+    -webkit-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.15);
+    -moz-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .post-content.odd {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .post-write textarea {
+    background-color: #303030;
+    color: #c0c0c0;
+    border-color: #505050;
+  }
+
+  .post-branch .panel {
+    border-color: #505050;
+  }
+
+  .post-branch .button {
+    background-color: #303030;
+    box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.15);
+    -webkit-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.15);
+    -moz-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .post-branch .button:hover {
+    box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
+    -moz-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .post-branch .button:active {
+    box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.1);
+    -moz-box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .post-branch .status {
+    color: #909090;
+  }
+
+  .post-comment .comment {
+    border-bottom-color: #505050;
+  }
+
+  .post-comment .comment-text {
+    background-color: #303030;
+    color: #c0c0c0;
+    border-color: #505050;
+  }
+
+  #bottom-container {
+    color: #505050;
+  }
+
+}
+
+/* toolbars */
+@media (prefers-color-scheme: dark) {
+
+  .infobar {
+    color: #909090;
+  }
+
+  .userbar {
+    color: #909090;
+  }
+
+  .userbar .username {
+    background-color: #303030;
+    color: #c0c0c0;
+    border-color: #505050;
+  }
+
+  .userbar .button {
+    border-color: #006d1b;
+    background-color: #008120;
+    color: #c0c0c0;
+  }
+
+  .userbar .button:hover {
+    background-color: #008f24;
+  }
+
+  .userbar .button:active {
+    background-color: #006d1b;
+  }
+
+}

@@ -1,0 +1,87 @@
+.infobar {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  height: 30px;
+  padding: 10px 20px;
+  color: #505050;
+}
+
+.post-content .infobar, .post-comment .infobar {
+  padding: 0;
+}
+
+.ops {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ops a {
+  margin-right: 10px;
+}
+
+.ops span {
+  margin-right: 7px;
+}
+
+.infobar .username {
+  position: absolute;
+  right: 20px;
+}
+
+.post-content .infobar .username, .post-comment .infobar .username {
+  right: 0;
+}
+
+.userbar {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  color: #505050;
+  padding-bottom: 10px;
+}
+
+.userbar .tool {
+  position: absolute;
+  right: 0;
+}
+
+.userbar .username {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #f0f0f0;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+.userbar .button {
+  display: inline-block;
+  padding: 5px 20px;
+  margin-left: 10px;
+  border: 1px solid #008120;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-color: #009c27;
+  color: white;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.userbar .button:hover {
+  background-color: #2cad4d;
+}
+
+.userbar .button:active {
+  background-color: #008120;
+}
