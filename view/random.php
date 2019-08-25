@@ -104,7 +104,7 @@ class RandomPageView extends PageView {
       printf($this->diffPrompt['months'], (int)round($month));
     }
     else {
-      printf($this->diffPrompt['months'],
+      printf($this->diffPrompt['years'],
              $target->diff($now)->format('%y'));
     }
   }
