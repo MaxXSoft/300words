@@ -18,7 +18,6 @@ const vmMain = new Vue({
     commentCount: 0,
     currentPage: 1,
     comments: [],
-    subComments: [],
     // subform control
     showSubform: 0,
     // write area
@@ -45,8 +44,7 @@ const vmMain = new Vue({
       }
     },
     totalCommentPage: function () {
-      let page = Math.ceil(this.commentCount / commentsPerPage)
-      return page ? page : 1
+      return Math.ceil(this.commentCount / commentsPerPage)
     },
   },
   methods: {

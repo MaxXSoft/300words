@@ -182,23 +182,31 @@ const refreshCommentInfo = async (vm) => {
   // get comment content
   const commentUrl = `${apiUrl}comment/${postId}/${vm.currentPage - 1}/${commentsPerPage}`
   let json = await fetchJsonAsync(commentUrl)
-  vm.comments = !json.error ? json.response : []
+  let comments = !json.error ? json.response : []
   // get sub comment content
-  vm.subComments.length = vm.comments.length
-  vm.subComments.fill([])
-  for (let i = 0; i < vm.comments.length; ++i) {
-    const comment = vm.comments[i]
-    if (comment.subCount > 0) {
-      const subUrl = `${apiUrl}sub/${comment.id}/0/${subCommentInitCount}`
+  for (const i of comments) {
+    if (i.subCount > 0) {
+      const subUrl = `${apiUrl}sub/${i.id}/0/${subCommentInitCount}`
       let json = await fetchJsonAsync(subUrl)
-      if (!json.error) vm.subComments[i] = json.response
+      i.subComments = !json.error ? json.response : []
+    }
+    else {
+      i.subComments = []
     }
   }
+  // update comment info
+  vm.comments = comments
 }
 
 const moreSubComments = async (vm, parentIndex) => {
   const subCommentIncreaseCount = 5
-  //
+  // get sub comment info after breakpoint
+  const comment = vm.comments[parentIndex]
+  const subUrl = `${apiUrl}sub/${comment.id}/${comment.subComments.length}/${subCommentIncreaseCount}`
+  let json = await fetchJsonAsync(subUrl)
+  if (!json.error) {
+    comment.subComments = comment.subComments.concat(json.response)
+  }
 }
 
 // change current page of comment area
