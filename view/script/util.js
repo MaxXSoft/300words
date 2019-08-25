@@ -169,3 +169,17 @@ const getMoreBranchInfo = async (vm) => {
 const getCommentInfo = async (vm) => {
   //
 }
+
+// change current page of comment area
+const changeCurrentCommentPage = (vm, page) => {
+  // set new value of current page
+  if (page <= 1) {
+    page = 1
+  }
+  else if (page >= vm.totalCommentPage) {
+    page = vm.totalCommentPage
+  }
+  vm.currentPage = page
+  // reload current page
+  // TODO
+}
