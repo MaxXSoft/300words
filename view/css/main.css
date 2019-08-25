@@ -286,6 +286,37 @@ a:hover {
   margin: 0.5rem 0;
 }
 
+.post-comment .page-selector {
+  display: flex;
+  display: -webkit-flex;
+  width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  align-items: center;
+  margin: 5px auto;
+}
+
+.page-selector .page-up {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.page-selector .page-current {
+  width: 30px;
+  text-align: center;
+  padding: 2px;
+  margin-right: 5px;
+  border: 1px solid #f0f0f0;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+.page-selector .page-down {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
 .post-comment .reply-box {
   width: 100%;
   padding-top: 10px;

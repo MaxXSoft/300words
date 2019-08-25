@@ -67,6 +67,12 @@
     color: #909090;
   }
 
+  .page-selector .page-current {
+    background-color: #303030;
+    color: #c0c0c0;
+    border-color: #505050;
+  }
+  
   .post-comment .comment {
     border-bottom-color: #505050;
   }

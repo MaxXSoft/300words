@@ -42,6 +42,10 @@ body {
   font-style: oblique;
 }
 
+.page-selector .page-current {
+  font-size: 14px;
+}
+
 .post-comment .comment-text {
   font-size: 15px;
 }
