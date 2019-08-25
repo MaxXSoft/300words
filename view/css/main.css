@@ -180,7 +180,16 @@ a:hover {
 }
 
 .post-branch .panel p {
-  white-space: normal;
+  white-space: pre-line;
+  margin: 0;
+}
+
+.post-branch .panel .abstract {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
   margin: 0.3rem 0;
 }
 
