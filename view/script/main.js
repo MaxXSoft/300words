@@ -26,7 +26,32 @@ const vmMain = new Vue({
     remember: false,
     restLength: 300,
   },
+  computed: {
+    lastPostNode: function () {
+      if (this.posts.length) {
+        return this.posts[this.posts.length - 1]
+      }
+      else {
+        return {
+          id: null,
+          parent: null,
+          user: 'N/A',
+          date: 'N/A',
+          post: 'N/A',
+        }
+      }
+    },
+  },
   methods: {
+    getDetailUrl: function (post) {
+      return post ? `${siteUrl}story/${post.id}/` : '#'
+    },
+    getFromRootUrl: function (post) {
+      return post ? `${siteUrl}story/${post.id}/fromroot/` : '#'
+    },
+    getDiff: function (date) {
+      return getDateDiff(date)
+    },
     toggleTextbox: function () {
       this.showSubform = this.showSubform != 1 ? 1 : 0
     },
@@ -52,13 +77,13 @@ const vmMain = new Vue({
       }
     },
     branchPanelClicked: function (index) {
-      //
+      window.location.href = this.getDetailUrl(this.branches[index])
     },
     replyComment: function (index) {
       //
     },
     submitComment: function () {
-      //
+      // TODO
     },
   },
   created: async function () {
