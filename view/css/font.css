@@ -38,6 +38,10 @@ body {
   font-size: 14px;
 }
 
+.post-branch.empty {
+  font-style: oblique;
+}
+
 .post-comment .comment-text {
   font-size: 15px;
 }

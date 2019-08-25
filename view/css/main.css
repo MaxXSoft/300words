@@ -253,6 +253,14 @@ a:hover {
   margin-right: 7px;
 }
 
+.post-branch.empty {
+  height: auto;
+}
+
+.post-branch.empty p {
+  text-align: center;
+}
+
 .post-comment .comment {
   padding: 10px 0;
   border-bottom: 1px solid #f0f0f0;
