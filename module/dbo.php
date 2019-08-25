@@ -130,8 +130,13 @@ class DBObject {
   // get list of all child posts of a parent post by its id
   public function getChildPostList($id, $start, $limit) {
     $stmt = $this->dbo->prepare(
-      "SELECT * FROM `{$this->prefix}posts`
-                WHERE parent = :i LIMIT :s, :l"
+      "SELECT id, post,
+              (SELECT COUNT(*) FROM `{$this->prefix}posts`
+                               WHERE parent = p.id) AS branchCount,
+              (SELECT COUNT(*) FROM `{$this->prefix}comments`
+                               WHERE postId = p.id) AS commentCount
+          FROM `{$this->prefix}posts` AS p
+          WHERE parent = :i LIMIT :s, :l"
     );
     $stmt->bindParam(':i', $id, PDO::PARAM_INT);
     $stmt->bindParam(':s', $start, PDO::PARAM_INT);
