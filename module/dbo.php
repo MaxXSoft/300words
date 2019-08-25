@@ -7,7 +7,7 @@ class DBObject {
   // constructor
   function __construct() {
     $dsn = 'mysql:host=' . __300WORDS_PDO_HOST__;
-    $dsn = $dsn . ';dbname=' . __300WORDS_PDO_NAME__;
+    $dsn .= ';dbname=' . __300WORDS_PDO_NAME__ . ';charset=utf8mb4';
     $this->dbo = new PDO($dsn, __300WORDS_PDO_USER__, __300WORDS_PDO_PASS__);
   }
 
