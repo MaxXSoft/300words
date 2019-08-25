@@ -16,6 +16,7 @@ const vmMain = new Vue({
     // comment info
     allCommentCount: 0,
     commentCount: 0,
+    currentPage: 1,
     comments: [],
     subComments: [],
     // subform control
@@ -25,6 +26,8 @@ const vmMain = new Vue({
     username: '',
     remember: false,
     restLength: 300,
+    replyParent: 0,
+    replyUser: '',
   },
   computed: {
     lastPostNode: function () {
@@ -40,6 +43,10 @@ const vmMain = new Vue({
           post: 'N/A',
         }
       }
+    },
+    totalCommentPage: function () {
+      let page = Math.ceil(this.commentCount / commentsPerPage)
+      return page ? page : 1
     },
   },
   methods: {
@@ -78,6 +85,15 @@ const vmMain = new Vue({
     },
     branchPanelClicked: function (index) {
       window.location.href = this.getDetailUrl(this.branches[index])
+    },
+    pageSelectorClicked: function (isUp) {
+      // set new value of current page
+      let offset = isUp ? -1 : 1
+      changeCurrentCommentPage(this, this.currentPage + offset)
+    },
+    pageSelectorEntered: function (event) {
+      let page = parseInt(event.target.value)
+      changeCurrentCommentPage(this, page)
     },
     replyComment: function (index) {
       //
