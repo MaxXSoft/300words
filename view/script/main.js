@@ -59,6 +59,9 @@ const vmMain = new Vue({
     getDiff: function (date) {
       return getDateDiff(date)
     },
+    splitTextToLines: function (text) {
+      return text.trim().split(/[\r\n]+/g)
+    },
     toggleTextbox: function () {
       this.showSubform = this.showSubform != 1 ? 1 : 0
     },
@@ -77,14 +80,20 @@ const vmMain = new Vue({
       console.log(this.username)
       console.log(this.remember)
     },
-    branchArrowClicked: function (isLeft) {
+    branchArrowClicked: async function (isLeft) {
       if (moveBranchPanel(isLeft)) {
         // load more branch info
-        getMoreBranchInfo(this)
+        await getMoreBranchInfo(this)
       }
     },
     branchPanelClicked: function (index) {
       window.location.href = this.getDetailUrl(this.branches[index])
+    },
+    replyComment: function (index, parentIndex = null) {
+      //
+    },
+    moreComment: async function (parentIndex) {
+      await moreSubComments(this, parentIndex)
     },
     pageSelectorClicked: function (isUp) {
       // set new value of current page
@@ -95,9 +104,6 @@ const vmMain = new Vue({
       let page = parseInt(event.target.value)
       changeCurrentCommentPage(this, page)
     },
-    replyComment: function (index) {
-      //
-    },
     submitComment: function () {
       // TODO
     },
@@ -105,7 +111,7 @@ const vmMain = new Vue({
   created: async function () {
     // initialize scroll detector
     if (fromRoot) {
-      window.onscroll = checkScroll(() => getPostInfo(this), 100)
+      window.onscroll = checkScroll(async () => await getPostInfo(this), 100)
     }
     // get info from server
     await getPathInfo(this)

@@ -167,6 +167,37 @@ const getMoreBranchInfo = async (vm) => {
 
 // get comment info from server
 const getCommentInfo = async (vm) => {
+  // get comment count
+  let json = await fetchJsonAsync(`${apiUrl}commentcount/${postId}/1`)
+  vm.allCommentCount = !json.error ? json.response : 0
+  json = await fetchJsonAsync(`${apiUrl}commentcount/${postId}/0`)
+  vm.commentCount = !json.error ? json.response : 0
+  // get comment content
+  refreshCommentInfo(vm)
+}
+
+// just get content of comments and sub comments
+const refreshCommentInfo = async (vm) => {
+  const subCommentInitCount = 3
+  // get comment content
+  const commentUrl = `${apiUrl}comment/${postId}/${vm.currentPage - 1}/${commentsPerPage}`
+  let json = await fetchJsonAsync(commentUrl)
+  vm.comments = !json.error ? json.response : []
+  // get sub comment content
+  vm.subComments.length = vm.comments.length
+  vm.subComments.fill([])
+  for (let i = 0; i < vm.comments.length; ++i) {
+    const comment = vm.comments[i]
+    if (comment.subCount > 0) {
+      const subUrl = `${apiUrl}sub/${comment.id}/0/${subCommentInitCount}`
+      let json = await fetchJsonAsync(subUrl)
+      if (!json.error) vm.subComments[i] = json.response
+    }
+  }
+}
+
+const moreSubComments = async (vm, parentIndex) => {
+  const subCommentIncreaseCount = 5
   //
 }
 
@@ -181,5 +212,5 @@ const changeCurrentCommentPage = (vm, page) => {
   }
   vm.currentPage = page
   // reload current page
-  // TODO
+  refreshCommentInfo(vm)
 }
