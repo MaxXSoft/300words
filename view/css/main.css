@@ -278,12 +278,22 @@ a:hover {
 .post-comment .comment.sub {
   margin: 5px 0 5px 20px;
   padding-left: 15px;
+  padding-bottom: 5px;
   border-left: 3px solid #009c27;
   border-bottom: none;
 }
 
 .post-comment p {
   margin: 0.5rem 0;
+}
+
+.post-comment .comment.more {
+  display: inline-block;
+  margin-left: 30px;
+  padding: 5px 0 10px 0;
+  /* width: 100%; */
+  /* text-align: center; */
+  border-bottom: none;
 }
 
 .post-comment .page-selector {
@@ -293,7 +303,7 @@ a:hover {
   width: -moz-fit-content;
   width: -webkit-fit-content;
   align-items: center;
-  margin: 5px auto;
+  margin: 15px auto 5px;
 }
 
 .page-selector .page-up {
