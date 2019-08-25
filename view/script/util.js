@@ -7,6 +7,45 @@ const getWordCount = (text) => {
   return chineseLen + englishLen
 }
 
+// check user name
+const checkUsername = (username) => {
+  // no space, include only num, letter, underline, chinese
+}
+
+// get difference between dates as a string
+const getDateDiff = (date) => {
+  // get target date (which time is set to zero)
+  let target = new Date(date)
+  target.setHours(0, 0, 0, 0)
+  // calculate difference
+  let now = new Date()
+  now.setHours(0, 0, 0, 0)
+  let diff = now - target
+  let diffDay = Math.floor(diff / (1000 * 60 * 60 * 24))
+  // get result
+  if (diffDay == 0) {
+    let d = new Date(date)
+    let h = String(d.getHours()).padStart(2, '0')
+    let m = String(d.getMinutes()).padStart(2, '0')
+    return diffPrompt.today.replace('%s', `${h}:${m}`)
+  }
+  else if (diffDay == 1) {
+    return diffPrompt.yesterday.replace('%s', diffDay)
+  }
+  else if (diffDay < 31) {
+    return diffPrompt.days.replace('%s', diffDay)
+  }
+  else if (diffDay < 366) {
+    let months = (now.getFullYear() - target.getFullYear()) * 12
+    months += now.getMonth() - target.getMonth()
+    return diffPrompt.months.replace('%s', months)
+  }
+  else {
+    let years = now.getFullYear() - target.getFullYear()
+    return diffPrompt.years.replace('%s', years)
+  }
+}
+
 // fetch JSON from URL asynchronously
 const fetchJsonAsync = async (url) => {
   let resp = await fetch(url)
@@ -87,7 +126,7 @@ const getPostInfo = async (vm) => {
     for (const i of vm.path) {
       if (i < 0) {
         // generate an ellipsis node
-        vm.posts.push({id: null, count: -i})
+        vm.posts.push({id: null, count: -i, post: ''})
       }
       else {
         // fetch post info
