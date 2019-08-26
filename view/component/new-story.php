@@ -70,7 +70,7 @@
             <label><input type="checkbox" v-model="remember">记住</label>
           </div>
           <div class="tool">
-            <label v-tooltip="'字符剩余 ' + (600 - content.length) + '/600'">{<i>{restLength}</i>}/300</label>
+            <label v-tooltip="'字符剩余 ' + (600 - content.length) + '/600'">{{restLength}}/300</label>
             <div class="button" @click="submitPost">发布</div>
           </div>
         </div>
