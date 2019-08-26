@@ -84,10 +84,7 @@ const vmMain = new Vue({
       this.restLength = 300 - getWordCount(this.content)
     },
     submitPost: function () {
-      // TODO
-      console.log(this.content)
-      console.log(this.username)
-      console.log(this.remember)
+      createNewStory(this)
     },
     branchArrowClicked: async function (isLeft) {
       if (moveBranchPanel(isLeft)) {
@@ -114,7 +111,7 @@ const vmMain = new Vue({
       changeCurrentCommentPage(this, page)
     },
     submitComment: function () {
-      // TODO
+      createNewComment(this)
     },
   },
   created: async function () {
