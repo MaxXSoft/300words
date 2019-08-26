@@ -142,9 +142,11 @@ const changeCurrentCommentPage = (vm, page) => {
   else if (page >= vm.totalCommentPage) {
     page = vm.totalCommentPage
   }
-  vm.currentPage = page
-  // reload current page
-  refreshCommentInfo(vm)
+  if (vm.currentPage != page) {
+    // change page & reload current page
+    vm.currentPage = page
+    refreshCommentInfo(vm)
+  }
 }
 
 // change reply status
@@ -164,4 +166,60 @@ const changeReplyStatus = (vm, index, parentIndex = null) => {
   vm.commentContent = commentPrompt.replyText.replace('%s', user)
   // set focus
   document.getElementById('comment-area').focus()
+}
+
+// validate post data
+const validateData = (vm) => {
+  // check username
+  if (!checkUsername(vm.username)) {
+    showTooltip(vm, postPrompt.username)
+    return false
+  }
+  // check content
+  let count = getWordCount(vm.content)
+  let len = vm.content.length
+  if (count == 0 || count > 300 || len > 600) {
+    showTooltip(vm, postPrompt.content)
+    return false
+  }
+  return true
+}
+
+// display information
+const showTooltip = (vm, text) => {
+  // TODO
+  console.log(text)
+}
+
+// create a new story
+const createNewStory = async (vm) => {
+  // validate user data
+  if (!validateData(vm)) return
+  // send post request
+  let json = await postJsonAsync(`${siteUrl}post/story/`, {
+    parent: postId,
+    user: vm.username,
+    content: vm.content,
+  })
+  // check for failure
+  if (json.error || !json.response) {
+    showTooltip(vm, postPrompt.server)
+    return
+  }
+  // update cookie
+  if (vm.remember) {
+    setCookie('username', vm.username, 30)
+  }
+  else {
+    setCookie('username', null, -1)
+  }
+  // update state
+  vm.content = ''
+  vm.branches.length = 0
+  getBranchInfo(vm)
+}
+
+// create a new comment
+const createNewComment = async (vm) => {
+  //
 }
