@@ -33,7 +33,6 @@ const vmMain = new Vue({
     commentContent: '',
     username: '',
     remember: false,
-    restLength: 300,
     replyParent: 0,
   },
   computed: {
@@ -50,6 +49,15 @@ const vmMain = new Vue({
           post: 'N/A',
         }
       }
+    },
+    restLength: function () {
+      return 300 - getWordCount(this.content)
+    },
+    selectedCommentPage: {
+      get: function () {
+        return this.currentPage
+      },
+      set: () => 0,
     },
     totalCommentPage: function () {
       return Math.ceil(this.commentCount / commentsPerPage)
@@ -79,9 +87,6 @@ const vmMain = new Vue({
       this.commentTip = commentPrompt.comment
       this.commentContent = ''
       this.replyParent = 0
-    },
-    contentChanged: function () {
-      this.restLength = 300 - getWordCount(this.content)
     },
     submitPost: function () {
       createNewStory(this)
@@ -118,6 +123,12 @@ const vmMain = new Vue({
     // initialize scroll detector
     if (fromRoot) {
       window.onscroll = checkScroll(async () => await getPostInfo(this), 100)
+    }
+    // get username from cookie
+    let username = getCookie('username')
+    if (username) {
+      this.username = username
+      this.remember = true
     }
     // get info from server
     await getPathInfo(this)
