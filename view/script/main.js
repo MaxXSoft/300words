@@ -1,3 +1,10 @@
+// register 'v-focus' directive
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus()
+  }
+})
+
 // Vue instance of navigation bar
 const vmHeader = new Vue({
   el: '#top-container'
@@ -22,11 +29,12 @@ const vmMain = new Vue({
     showSubform: 0,
     // write area
     content: '',
+    commentTip: commentPrompt.comment,
+    commentContent: '',
     username: '',
     remember: false,
     restLength: 300,
     replyParent: 0,
-    replyUser: '',
   },
   computed: {
     lastPostNode: function () {
@@ -68,6 +76,9 @@ const vmMain = new Vue({
     },
     toggleComment: function () {
       this.showSubform = this.showSubform != 3 ? 3 : 0
+      this.commentTip = commentPrompt.comment
+      this.commentContent = ''
+      this.replyParent = 0
     },
     contentChanged: function () {
       this.restLength = 300 - getWordCount(this.content)
@@ -88,7 +99,7 @@ const vmMain = new Vue({
       window.location.href = this.getDetailUrl(this.branches[index])
     },
     replyComment: function (index, parentIndex = null) {
-      //
+      changeReplyStatus(this, index, parentIndex)
     },
     moreComment: async function (parentIndex) {
       await moreSubComments(this, parentIndex)
