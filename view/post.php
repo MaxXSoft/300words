@@ -35,7 +35,7 @@ class PostView extends View {
   }
 
   // make sure the requests from clients is not too frequent
-  private function checkFrequency() {
+  private static function checkFrequency() {
     session_start();
     if (!isset($_SESSION['lastreq'])) return false;
     // check time interval (must greater than 3 seconds)
@@ -45,10 +45,11 @@ class PostView extends View {
     if ($diff <= 3) return false;
     // update session
     $_SESSION['lastreq'] = $now;
+    return true;
   }
 
   // validate post data
-  private function validateData($args) {
+  private function validateData() {
     // check username
     if (!$this->checkUsername($this->data['user'])) return false;
     // check content length
@@ -62,7 +63,7 @@ class PostView extends View {
   public static function createSession() {
     session_start();
     if (isset($_SESSION['lastreq'])) {
-      return $this->checkFrequency();
+      return self::checkFrequency();
     }
     else {
       $_SESSION['lastreq'] = new DateTime();
@@ -74,9 +75,9 @@ class PostView extends View {
     $error = false;
     $resp = null;
     // receive JSON data from request
-    $this->data = json_decode(file_get_contents('php://input'));
+    $this->data = json_decode(file_get_contents('php://input'), true);
     // validate data first
-    if (!$this->checkFrequency() || !$this->validateData($args)) {
+    if (!self::checkFrequency() || !$this->validateData()) {
       $error = true;
     }
     else {
