@@ -9,7 +9,7 @@
   </div>
   <script>
     // constant definitions
-    const siteUrl = <?php $this->url('/'); ?>
+    const siteUrl = '<?php $this->url(''); ?>'
     const apiUrl = `${siteUrl}api/`
     const diffPrompt = {
       today:      '%s',
@@ -28,10 +28,15 @@
       content:    '输入内容超过 300 字或 600 字符',
       server:     '服务器拒绝了此次请求',
     }
+
     const maxPostCount = <?php $this->maxPostCount(); ?>
+
     const commentsPerPage = <?php $this->commentsPerPage(); ?>
+
     const postId = <?php $this->postId(); ?>
+
     const fromRoot = <?php $this->fromRoot(); ?>
+
   </script>
   <script src="<?php $this->script('util.js'); ?>"></script>
   <script src="<?php $this->script('control.js'); ?>"></script>
