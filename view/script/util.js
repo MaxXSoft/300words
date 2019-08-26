@@ -222,3 +222,22 @@ const changeCurrentCommentPage = (vm, page) => {
   // reload current page
   refreshCommentInfo(vm)
 }
+
+// change reply status
+const changeReplyStatus = (vm, index, parentIndex = null) => {
+  // get username
+  let user = null
+  if (parentIndex === null) {
+    user = vm.comments[index].user
+    vm.replyParent = vm.comments[index].id
+  }
+  else {
+    user = vm.comments[parentIndex].subComments[index].user
+    vm.replyParent = vm.comments[parentIndex].id
+  }
+  // change the rest status
+  vm.commentTip = commentPrompt.reply.replace('%s', user)
+  vm.commentContent = commentPrompt.replyText.replace('%s', user)
+  // set focus
+  document.getElementById('comment-area').focus()
+}
