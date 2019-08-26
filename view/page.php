@@ -121,9 +121,9 @@ abstract class PageView extends View {
         $this->script('main.js');
         break;
       }
-      case 3: {
-        // root list
-        $this->script('root.js');
+      case 1: case 2: case 3: {
+        // hot/latest/root list
+        $this->script('list.js');
         break;
       }
       default: {
