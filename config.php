@@ -15,3 +15,6 @@ define('__300WORDS_PDO_PASS__', MYSQL_PASSWORD);
 
 // maximum number of posts in story page
 define('__300WORDS_MAX_POST_COUNT__', 10);
+
+// number of comments per page
+define('__300WORDS_COMMENTS_PER_PAGE__', 10);
