@@ -203,10 +203,10 @@ const doPost = async (vm, url, data) => {
   }
   // update cookie
   if (vm.remember) {
-    setCookie('username', vm.username, 30)
+    setCookie('300words_username', vm.username, 30)
   }
   else {
-    setCookie('username', null, -1)
+    setCookie('300words_username', null, -1)
   }
   return true
 }

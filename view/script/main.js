@@ -113,7 +113,7 @@ const vmMain = new Vue({
       window.onscroll = checkScroll(async () => await getPostInfo(this), 100)
     }
     // get username from cookie
-    let username = getCookie('username')
+    let username = getCookie('300words_username')
     if (username) {
       this.username = username
       this.remember = true
