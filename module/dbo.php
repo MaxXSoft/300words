@@ -35,18 +35,16 @@ class DBObject {
   }
 
   // create a new comment
-  public function newComment($postId, $parent, $user, $reply, $text) {
+  public function newComment($postId, $parent, $user, $text) {
     $stmt = $this->dbo->prepare(
       "INSERT INTO `{$this->prefix}comments`
-                    (postId, parent, user, reply, text)
-              VALUES(:postId, :parent, :user, :reply, :text)"
+                    (postId, parent, user, text)
+              VALUES(:postId, :parent, :user, :text)"
     );
     $stmt->bindParam(':postId', $postId, PDO::PARAM_INT);
     $stmt->bindParam(':parent', $parent,
                      $parent === null ? PDO::PARAM_NULL : PDO::PARAM_INT);
     $stmt->bindParam(':user', $user, PDO::PARAM_STR);
-    $stmt->bindParam(':reply', $reply,
-                     $reply === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
     $stmt->bindParam(':text', $text, PDO::PARAM_STR);
     return $stmt->execute();
   }
