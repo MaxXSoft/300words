@@ -27,7 +27,6 @@ abstract class PageView extends View {
   // set tabs array
   protected function setTabs($tabs) {
     self::$tabs = $tabs;
-    self::$currentTab = 0;
   }
 
   // get iterator of tabs
