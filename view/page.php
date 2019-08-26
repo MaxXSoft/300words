@@ -114,6 +114,26 @@ abstract class PageView extends View {
     echo($this->joinURL("view/script/{$path}"));
   }
 
+  // echo a URL of main script file
+  protected function scriptMain() {
+    switch (self::$currentTab) {
+      case 0: {
+        // random story
+        $this->script('main.js');
+        break;
+      }
+      case 3: {
+        // root list
+        $this->script('root.js');
+        break;
+      }
+      default: {
+        $this->script('main.js');
+        break;
+      }
+    }
+  }
+
   // echo current year
   protected function year() {
     echo(date('Y'));
