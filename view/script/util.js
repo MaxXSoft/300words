@@ -15,7 +15,7 @@ const checkUsername = (username) => {
   // check input
   let result = username.match(re)
   if (result === null) return false
-  return result[0].length <= 16
+  return result[0].length > 0 && result[0].length <= 16
 }
 
 // get difference between dates as a string
