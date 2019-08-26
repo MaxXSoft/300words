@@ -55,7 +55,7 @@ abstract class PageView extends View {
   protected function title() {
     $title = self::$title;
     // check if current title is null
-    if (is_null($title)) {
+    if (is_null($title) && self::$currentTab >= 0) {
       // use name of current tab as title
       $it = new TrivialIterator(self::$tabs);
       $title = $it->getValueByIndex(self::$currentTab);
@@ -124,10 +124,6 @@ abstract class PageView extends View {
       case 1: case 2: case 3: {
         // hot/latest/root list
         $this->script('list.js');
-        break;
-      }
-      default: {
-        $this->script('main.js');
         break;
       }
     }
