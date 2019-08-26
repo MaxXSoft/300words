@@ -246,3 +246,27 @@ const createNewComment = async (vm) => {
     getCommentInfo(vm)
   }
 }
+
+// get root list count from server
+const getRootListCount = async (vm) => {
+  let json = await fetchJsonAsync(`${apiUrl}rootcount/`)
+  vm.totalCount = !json.error ? json.response : 0
+}
+
+// get root list info from server
+const getRootListInfo = async (vm) => {
+  const postInitCount = 10
+  // get post info
+  const url = `${apiUrl}root/${vm.posts.length}/${postInitCount}`
+  let json = await fetchJsonAsync(url)
+  let posts = !json.error ? json.response : []
+  // get branch & comment count
+  for (const i of posts) {
+    let json = await fetchJsonAsync(`${apiUrl}childcount/${i.id}`)
+    i.branchCount = !json.error ? json.response : 0
+    json = await fetchJsonAsync(`${apiUrl}commentcount/${i.id}/1`)
+    i.commentCount = !json.error ? json.response : 0
+  }
+  // update post info
+  vm.posts = vm.posts.concat(posts)
+}
