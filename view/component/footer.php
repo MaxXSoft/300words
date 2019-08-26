@@ -41,6 +41,7 @@
   <script src="<?php $this->script('util.js'); ?>"></script>
   <script src="<?php $this->script('control.js'); ?>"></script>
   <script src="<?php $this->script('textarea-autosize.js'); ?>"></script>
+  <script src="<?php $this->script('header.js'); ?>"></script>
   <script src="<?php $this->scriptMain(); ?>"></script>
 </body>
 
