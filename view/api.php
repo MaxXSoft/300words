@@ -34,6 +34,14 @@ class APIView extends View {
         $resp = $this->dbo->getPostList($args[1], $args[2]);
         break;
       }
+      case "latest": {
+        $resp = $this->dbo->getPostListLatest($args[1], $args[2]);
+        break;
+      }
+      case "hot": {
+        $resp = $this->dbo->getPostListHot($args[1], $args[2]);
+        break;
+      }
       case "rootcount": {
         $resp = $this->dbo->getRootPostCount();
         break;
