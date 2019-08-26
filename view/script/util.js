@@ -73,3 +73,24 @@ const checkScroll = (callback, limit = 0) => {
     }
   }
 }
+
+// set cookie
+const setCookie = (name, value, days) => {
+  let expires = ''
+  if (days) {
+    let date = new Date()
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
+    expires = `expires=${date.toUTCString()}`
+  }
+  document.cookie = `${name}=${value || ''}; ${expires}; path=/`
+}
+
+// get cookie
+const getCookie = (name) => {
+  let nameEq = `${name}=`
+  let cookies = document.cookie.split(/;\s?/g)
+  for (const c of cookies) {
+    if (c.indexOf(nameEq) == 0) return c.substring(nameEq.length, c.length)
+  }
+  return null
+}
