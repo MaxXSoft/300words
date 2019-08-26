@@ -49,6 +49,14 @@ class DBObject {
     return $stmt->execute();
   }
 
+  // get post id randomly
+  public function getRandomPostId() {
+    $result = $this->querySQL(
+      "SELECT id FROM `{$this->prefix}posts` ORDER BY RAND() LIMIT 1"
+    );
+    return (int)$result[0][0];
+  }
+
   // get post info by id
   public function getPostInfo($id) {
     $stmt = $this->dbo->prepare(
