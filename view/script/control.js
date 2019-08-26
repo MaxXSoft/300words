@@ -212,20 +212,25 @@ const doPost = async (vm, url, data) => {
 }
 
 // create a new story
-const createNewStory = async (vm) => {
+const createNewStory = async (vm, isRoot = false) => {
   // validate user data
   if (!validateData(vm, vm.content)) return
   // send post request
   let ret = await doPost(vm, `${siteUrl}post/story/`, {
-    parent: postId,
+    parent: isRoot ? null : postId,
     user: vm.username,
     content: vm.content,
   })
   if (ret) {
     // update state
     vm.content = ''
-    vm.branches.length = 0
-    getBranchInfo(vm)
+    if (!isRoot) {
+      vm.branches.length = 0
+      getBranchInfo(vm)
+    }
+    else {
+      window.location = `${siteUrl}latest/`
+    }
   }
 }
 
