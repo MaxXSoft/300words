@@ -43,7 +43,12 @@ const vmMain = new Vue({
       this.remember = true
     }
     // get info from server
-    await getRootListCount(this)
-    getRootListInfo(this)
+    let url = window.location.href
+    let isRootList = url.endsWith('/') ? url.endsWith('root/') :
+                                         url.endsWith('root')
+    if (isRootList) {
+      await getRootListCount(this)
+      getRootListInfo(this)
+    }
   },
 })

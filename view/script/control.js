@@ -229,7 +229,7 @@ const createNewStory = async (vm, isRoot = false) => {
       getBranchInfo(vm)
     }
     else {
-      window.location = `${siteUrl}latest/`
+      window.location.href = `${siteUrl}latest/`
     }
   }
 }
