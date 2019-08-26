@@ -30,10 +30,27 @@ const vmMain = new Vue({
     },
   },
   created: async function () {
+    let url = window.location.href
+    let urlArr = url.split('/')
+    let page = url.endsWith('/') ? urlArr[urlArr.length - 2] :
+                                   urlArr[urlArr.length - 1]
     // initialize scroll detector
     window.onscroll = checkScroll(async () => {
       if (this.posts.length < this.totalCount) {
-        getRootListInfo(this)
+        switch (page) {
+          case 'hot': {
+            await getPostListInfo(this, false)
+            break
+          }
+          case 'latest': {
+            await getPostListInfo(this, true)
+            break
+          }
+          case 'root': {
+            await getRootListInfo(this)
+            break
+          }
+        }
       }
     }, 100)
     // get username from cookie
@@ -43,12 +60,22 @@ const vmMain = new Vue({
       this.remember = true
     }
     // get info from server
-    let url = window.location.href
-    let isRootList = url.endsWith('/') ? url.endsWith('root/') :
-                                         url.endsWith('root')
-    if (isRootList) {
-      await getRootListCount(this)
-      getRootListInfo(this)
+    switch (page) {
+      case 'hot': {
+        await getPostListCount(this)
+        getPostListInfo(this, false)
+        break
+      }
+      case 'latest': {
+        await getPostListCount(this)
+        getPostListInfo(this, true)
+        break
+      }
+      case 'root': {
+        await getRootListCount(this)
+        getRootListInfo(this)
+        break
+      }
     }
   },
 })
