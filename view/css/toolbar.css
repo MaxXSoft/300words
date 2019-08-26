@@ -20,7 +20,7 @@
   user-select: none;
 }
 
-.ops a {
+.ops a, .ops label {
   margin-right: 10px;
 }
 
