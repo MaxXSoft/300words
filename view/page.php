@@ -13,6 +13,12 @@ abstract class PageView extends View {
   // page title
   private static $title = null;
 
+  // current post id
+  private static $currentPostId = null;
+
+  // 'view from root' flag
+  private static $flagFromRoot = false;
+
   // constructor
   public function __construct() {
     $this->using('iterator.php');
@@ -56,6 +62,36 @@ abstract class PageView extends View {
       $title = $it->getValueByIndex(self::$currentTab);
     }
     echo($title);
+  }
+
+  // echo max post count
+  protected function maxPostCount() {
+    echo(__300WORDS_MAX_POST_COUNT__);
+  }
+
+  // echo comments per page
+  protected function commentsPerPage() {
+    echo(__300WORDS_COMMENTS_PER_PAGE__);
+  }
+
+  // set current post id
+  protected function setPostId($postId) {
+    self::$currentPostId = $postId;
+  }
+
+  // echo current post id
+  protected function postId() {
+    echo(self::$currentPostId === null ? 'null' : self::$currentPostId);
+  }
+
+  // set 'view from root' flag
+  protected function setFromRoot($fromRoot) {
+    self::$flagFromRoot = $fromRoot;
+  }
+
+  // echo 'view from root' flag
+  protected function fromRoot() {
+    echo(self::$flagFromRoot ? 'true' : 'false');
   }
 
   // echo a URL
