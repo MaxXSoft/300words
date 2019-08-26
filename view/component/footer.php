@@ -25,7 +25,7 @@
     }
     const postPrompt = {
       username:   '用户名无效\n只能包含字母、数字、下划线、中文字符和 Emoji',
-      content:    '输入内容超过 300 字或 600 字符',
+      content:    '输入内容不能为空\n且不能超过 300 字或 600 字符',
       server:     '服务器拒绝了此次请求',
     }
 

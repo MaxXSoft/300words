@@ -188,8 +188,8 @@ const validateData = (vm, text) => {
 
 // display information
 const showTooltip = (vm, text) => {
-  // TODO
-  console.log(text)
+  // TODO: use v-tooltip
+  alert(text)
 }
 
 // perform post and update cookie
