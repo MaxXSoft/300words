@@ -4,7 +4,7 @@
 
 300字，开源的分支式故事接龙网站框架。
 
-## What is `Story Solitaire`
+## What is *Story Solitaire*
 
 Story solitaire is a kind of game, that allows participants to tell a story that follows the story told by the previous person. 
 
