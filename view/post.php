@@ -7,6 +7,9 @@ class PostView extends View {
   // database object
   private $dbo = null;
 
+  // received data
+  private $data = null;
+
   // constructor
   public function __construct() {
     $this->using('dbo.php');
@@ -47,10 +50,10 @@ class PostView extends View {
   // validate post data
   private function validateData($args) {
     // check username
-    if (!$this->checkUsername($_POST['user'])) return false;
+    if (!$this->checkUsername($this->data['user'])) return false;
     // check content length
-    $count = $this->getWordCount($_POST['content']);
-    $len = mb_strlen($_POST['content']);
+    $count = $this->getWordCount($this->data['content']);
+    $len = mb_strlen($this->data['content']);
     if ($count == 0 || $count > 300 || $len > 600) return false;
     return true;
   }
@@ -70,6 +73,8 @@ class PostView extends View {
   public function render($args) {
     $error = false;
     $resp = null;
+    // receive JSON data from request
+    $this->data = json_decode(file_get_contents('php://input'));
     // validate data first
     if (!$this->checkFrequency() || !$this->validateData($args)) {
       $error = true;
@@ -78,13 +83,16 @@ class PostView extends View {
       // perform operations
       switch ($args[0]) {
         case 'story': {
-          $resp = $this->dbo->newPost($_POST['parent'], $_POST['user'],
-                                      $_POST['content']);
+          $resp = $this->dbo->newPost($this->data['parent'],
+                                      $this->data['user'],
+                                      $this->data['content']);
           break;
         }
         case 'comment': {
-          $resp = $this->dbo->newComment($_POST['post'], $_POST['parent'],
-                                         $_POST['user'], $_POST['content']);
+          $resp = $this->dbo->newComment($this->data['post'],
+                                         $this->data['parent'],
+                                         $this->data['user'],
+                                         $this->data['content']);
           break;
         }
         default: {
