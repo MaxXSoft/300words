@@ -3,7 +3,7 @@
     <?php $this->need('content.php'); ?>
     <div class="post-subform" v-if="showSubform != 0">
       <div class="post-write" v-if="showSubform == 1" key="subform-1">
-        <textarea placeholder="脑洞大开..." v-focus v-model="content"></textarea>
+        <textarea placeholder="脑洞大开..." v-focus v-model="content" @keyup.ctrl.enter="submitPost"></textarea>
         <div class="userbar">
           <div class="user">
             <input type="text" placeholder="署名" class="username" v-model="username">
