@@ -5,6 +5,7 @@ require_once 'config.php';
 require_once 'module/router.php';
 require_once 'view/random.php';
 require_once 'view/api.php';
+require_once 'view/post.php';
 
 // initialize router
 Router::init('/300words', array(
@@ -17,6 +18,7 @@ Router::init('/300words', array(
   // 'new'     => function () { return new WritePageView(); },
   // 'story'   => function () { return new StoryPageView(); },
   'api'     => function () { return new APIView(); },
+  'post'    => function () { return new PostView(); },
 ));
 
 // parse
