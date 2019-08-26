@@ -23,6 +23,7 @@ class StoryPageView extends PageView {
     $this->setPostId($id);
     $this->setFromRoot($args[1] == 'fromroot');
     // render page
+    PostView::createSession();
     $this->begin();
     $this->need('post-box.php');
     $this->end();

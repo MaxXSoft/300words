@@ -26,6 +26,7 @@ class RandomPageView extends PageView {
   }
 
   public function render($args) {
+    PostView::createSession();
     $this->begin();
     $this->need('post-box.php');
     $this->end();
