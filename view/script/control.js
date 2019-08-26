@@ -104,7 +104,8 @@ const getCommentInfo = async (vm) => {
 const refreshCommentInfo = async (vm) => {
   const subCommentInitCount = 3
   // get comment content
-  const commentUrl = `${apiUrl}comment/${postId}/${vm.currentPage - 1}/${commentsPerPage}`
+  let startPos = (vm.currentPage - 1) * commentsPerPage
+  const commentUrl = `${apiUrl}comment/${postId}/${startPos}/${commentsPerPage}`
   let json = await fetchJsonAsync(commentUrl)
   let comments = !json.error ? json.response : []
   // get sub comment content
@@ -169,15 +170,15 @@ const changeReplyStatus = (vm, index, parentIndex = null) => {
 }
 
 // validate post data
-const validateData = (vm) => {
+const validateData = (vm, text) => {
   // check username
   if (!checkUsername(vm.username)) {
     showTooltip(vm, postPrompt.username)
     return false
   }
   // check content
-  let count = getWordCount(vm.content)
-  let len = vm.content.length
+  let count = getWordCount(text)
+  let len = text.length
   if (count == 0 || count > 300 || len > 600) {
     showTooltip(vm, postPrompt.content)
     return false
@@ -191,20 +192,14 @@ const showTooltip = (vm, text) => {
   console.log(text)
 }
 
-// create a new story
-const createNewStory = async (vm) => {
-  // validate user data
-  if (!validateData(vm)) return
+// perform post and update cookie
+const doPost = async (vm, url, data) => {
   // send post request
-  let json = await postJsonAsync(`${siteUrl}post/story/`, {
-    parent: postId,
-    user: vm.username,
-    content: vm.content,
-  })
+  let json = await postJsonAsync(url, data)
   // check for failure
   if (json.error || !json.response) {
     showTooltip(vm, postPrompt.server)
-    return
+    return false
   }
   // update cookie
   if (vm.remember) {
@@ -213,13 +208,41 @@ const createNewStory = async (vm) => {
   else {
     setCookie('username', null, -1)
   }
-  // update state
-  vm.content = ''
-  vm.branches.length = 0
-  getBranchInfo(vm)
+  return true
+}
+
+// create a new story
+const createNewStory = async (vm) => {
+  // validate user data
+  if (!validateData(vm, vm.content)) return
+  // send post request
+  let ret = await doPost(vm, `${siteUrl}post/story/`, {
+    parent: postId,
+    user: vm.username,
+    content: vm.content,
+  })
+  if (ret) {
+    // update state
+    vm.content = ''
+    vm.branches.length = 0
+    getBranchInfo(vm)
+  }
 }
 
 // create a new comment
 const createNewComment = async (vm) => {
-  //
+  // validate user data
+  if (!validateData(vm, vm.commentContent)) return
+  // send post request
+  let ret = await doPost(vm, `${siteUrl}post/comment/`, {
+    post: postId,
+    parent: vm.replyParent ? vm.replyParent : null,
+    user: vm.username,
+    content: vm.commentContent,
+  })
+  if (ret) {
+    // update state
+    vm.commentContent = ''
+    getCommentInfo(vm)
+  }
 }
