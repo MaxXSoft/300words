@@ -18,6 +18,11 @@ body {
   font-style: oblique;
 }
 
+.post-content h1 {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
 .infobar {
   font-size: 14px;
 }

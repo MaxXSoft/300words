@@ -117,6 +117,11 @@ a:hover {
   margin: 0.5rem 0;
 }
 
+.post-content h1 {
+  padding-left: 10px;
+  border-left: 5px solid #009c27;
+}
+
 .post-content.even {
   background-color: rgba(0, 0, 0, 0);
 }
