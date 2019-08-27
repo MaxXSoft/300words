@@ -4,23 +4,22 @@ const moveBranchPanel = (isLeft) => {
   // get target element
   let container = document.getElementById('panel-container')
   let panel = document.querySelectorAll('.post-branch .panel')
+  let outer = document.getElementById('post-branch')
   if (!panel.length) return false
   // calculate new left position
   let left = container.offsetLeft
   let offset = container.offsetWidth / panel.length
   left += offset * (isLeft ? 1 : -1)
   // check if the boundary is reached
-  let ret = false
   if (left > 0) {
     left = 0
   }
   else if (left <= -offset * (panel.length - 1)) {
     left = -offset * (panel.length - 1)
-    ret = true
   }
   // set left position
   container.style.left = left + 'px'
-  return ret
+  return left + container.offsetWidth <= outer.offsetWidth
 }
 
 // get path info from server
