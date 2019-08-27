@@ -2,6 +2,7 @@
     <div id="footer">
       <div id="footer-left">
         <a href="<?php $this->url('about/'); ?>">关于</a>
+        <a href="<?php $this->url('about/#disclaimer'); ?>">免责声明</a>
         <a href="<?php $this->url('about/#coop'); ?>">合作</a>
       </div>
       <div id="footer-right">Copyright <?php $this->year(); ?> <?php $this->org(); ?></div>
