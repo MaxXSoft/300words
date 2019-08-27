@@ -168,7 +168,7 @@ a:hover {
 }
 
 .post-branch .panel {
-  display: inline-block;
+  display: inline-flex;
   height: 190px;
   width: 220px;
   padding: 10px 15px;
