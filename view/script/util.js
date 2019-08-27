@@ -62,10 +62,11 @@ const fetchJsonAsync = async (url) => {
 const postJsonAsync = async (url, data) => {
   let resp = await fetch(url, {
     method: 'POST',
-    body: JSON.stringify(data),
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(data),
   })
   return await resp.json()
 }
