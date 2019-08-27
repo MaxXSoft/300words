@@ -12,6 +12,7 @@ class RandomPageView extends PageView {
     parent::__construct();
     // initialize internal object
     $this->using('dbo.php');
+    $this->using('session.php');
     $this->dbo = new DBObject();
     // initialize properties
     $this->setCurrentTab(0);
@@ -26,7 +27,7 @@ class RandomPageView extends PageView {
   }
 
   public function render($args) {
-    PostView::createSession();
+    Session::start();
     $this->begin();
     $this->need('post-box.php');
     $this->end();

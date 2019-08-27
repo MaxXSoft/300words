@@ -10,6 +10,7 @@ class StoryPageView extends PageView {
   public function __construct() {
     parent::__construct();
     $this->using('dbo.php');
+    $this->using('session.php');
     $this->dbo = new DBObject();
     $this->setCurrentTab(0);
   }
@@ -23,7 +24,7 @@ class StoryPageView extends PageView {
     $this->setPostId($id);
     $this->setFromRoot($args[1] == 'fromroot');
     // render page
-    PostView::createSession();
+    Session::start();
     $this->begin();
     $this->need('post-box.php');
     $this->end();

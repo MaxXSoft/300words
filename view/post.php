@@ -13,6 +13,7 @@ class PostView extends View {
   // constructor
   public function __construct() {
     $this->using('dbo.php');
+    $this->using('session.php');
     $this->dbo = new DBObject();
   }
 
@@ -34,20 +35,6 @@ class PostView extends View {
     return $len > 0 && $len <= 16;
   }
 
-  // make sure the requests from clients is not too frequent
-  private static function checkFrequency() {
-    session_start();
-    if (!isset($_SESSION['lastreq'])) return false;
-    // check time interval (must greater than 3 seconds)
-    $last = $_SESSION['lastreq'];
-    $now = new DateTime();
-    $diff = $now->getTimestamp() - $last->getTimestamp();
-    if ($diff <= 3) return false;
-    // update session
-    $_SESSION['lastreq'] = $now;
-    return true;
-  }
-
   // validate post data
   private function validateData() {
     // check username
@@ -59,25 +46,13 @@ class PostView extends View {
     return true;
   }
 
-  // create new session
-  public static function createSession() {
-    session_start();
-    if (isset($_SESSION['lastreq'])) {
-      return self::checkFrequency();
-    }
-    else {
-      $_SESSION['lastreq'] = new DateTime();
-    }
-    return true;
-  }
-
   public function render($args) {
     $error = false;
     $resp = null;
     // receive JSON data from request
     $this->data = json_decode(file_get_contents('php://input'), true);
     // validate data first
-    if (!self::checkFrequency() || !$this->validateData()) {
+    if (!Session::validate() || !$this->validateData()) {
       $error = true;
     }
     else {

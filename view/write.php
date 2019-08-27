@@ -10,6 +10,7 @@ class WritePageView extends PageView {
   public function __construct() {
     parent::__construct();
     $this->using('iterator.php');
+    $this->using('session.php');
     $this->setCurrentTab(3);
     $this->setTitle('写故事');
   }
@@ -27,7 +28,7 @@ class WritePageView extends PageView {
   }
 
   public function render($args) {
-    PostView::createSession();
+    Session::start();
     $this->begin();
     $this->need('new-story.php');
     $this->end();
