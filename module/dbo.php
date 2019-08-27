@@ -104,9 +104,14 @@ class DBObject {
   // get list of posts (sort by date)
   public function getPostListLatest($start, $limit) {
     $stmt = $this->dbo->prepare(
-      "SELECT * FROM `{$this->prefix}posts` 
-                ORDER BY date DESC
-                LIMIT :s, :l"
+      "SELECT *,
+              (SELECT COUNT(*) FROM `{$this->prefix}posts`
+                              WHERE parent = p.id) AS branchCount,
+              (SELECT COUNT(*) FROM `{$this->prefix}comments`
+                              WHERE postId = p.id) AS commentCount
+          FROM `{$this->prefix}posts` AS p
+          ORDER BY date DESC
+          LIMIT :s, :l"
     );
     $stmt->bindParam(':s', $start, PDO::PARAM_INT);
     $stmt->bindParam(':l', $limit, PDO::PARAM_INT);
@@ -147,8 +152,15 @@ class DBObject {
   // get list of root posts
   public function getRootPostList($start, $limit) {
     $stmt = $this->dbo->prepare(
-      "SELECT * FROM `{$this->prefix}posts`
-                WHERE parent IS NULL LIMIT :s, :l"
+      "SELECT *,
+              (SELECT COUNT(*) FROM `{$this->prefix}posts`
+                              WHERE parent = p.id) AS branchCount,
+              (SELECT COUNT(*) FROM `{$this->prefix}comments`
+                              WHERE postId = p.id) AS commentCount
+          FROM `{$this->prefix}posts` AS p
+          WHERE parent IS NULL
+          ORDER BY date DESC
+          LIMIT :s, :l"
     );
     $stmt->bindParam(':s', $start, PDO::PARAM_INT);
     $stmt->bindParam(':l', $limit, PDO::PARAM_INT);
