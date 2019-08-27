@@ -185,8 +185,9 @@ a:hover {
 }
 
 .post-branch .panel p {
-  white-space: pre-line;
   margin: 0;
+  white-space: pre-line;
+  overflow: hidden;
 }
 
 .post-branch .panel .abstract {
