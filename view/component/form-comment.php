@@ -24,7 +24,7 @@
   <div class="page-down" @click="pageSelectorClicked(false)">下一页</div>
 </div>
 <div class="reply-box">
-  <textarea-autosize id="comment-area" class="comment-text" v-focus :placeholder="commentTip" v-model="commentContent" :max-height="150">
+  <textarea-autosize id="comment-area" class="comment-text" :placeholder="commentTip" v-model="commentContent" :max-height="150">
   </textarea-autosize>
   <div class="userbar">
     <div class="user">
