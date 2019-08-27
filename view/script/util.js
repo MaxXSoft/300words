@@ -75,9 +75,11 @@ const checkScroll = (callback, limit = 0) => {
   let isCalled = false
   return () => {
     // calculate offset
-    let d = document.documentElement
-    let offset = d.scrollTop + window.innerHeight
-    let height = d.offsetHeight
+    let scrollTop = Math.max(window.pageYOffset,
+                             document.documentElement.scrollTop,
+                             document.body.scrollTop)
+    let offset = scrollTop + window.innerHeight
+    let height = document.documentElement.offsetHeight
     if (!isCalled && offset >= height - limit) {
       callback()
       isCalled = true
