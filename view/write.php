@@ -27,6 +27,7 @@ class WritePageView extends PageView {
   }
 
   public function render($args) {
+    PostView::createSession();
     $this->begin();
     $this->need('new-story.php');
     $this->end();
