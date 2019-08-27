@@ -133,6 +133,11 @@ abstract class PageView extends View {
   protected function year() {
     echo(date('Y'));
   }
+  
+  // echo organization name
+  protected function org() {
+    echo(__300WORDS_ORG_NAME__);
+  }
 
   // render the header and navigation bar of current page
   protected function begin() {

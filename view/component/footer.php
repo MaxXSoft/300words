@@ -4,7 +4,7 @@
         <a href="<?php $this->url('about/'); ?>">关于</a>
         <a href="<?php $this->url('about/#coop'); ?>">合作</a>
       </div>
-      <div id="footer-right">Copyright 2010-<?php $this->year(); ?> MaxXSoft</div>
+      <div id="footer-right">Copyright <?php $this->year(); ?> <?php $this->org(); ?></div>
     </div>
   </div>
   <script>

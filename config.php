@@ -4,6 +4,9 @@
 define('__300WORDS_SITE_URL__', '//localhost/300words/');
 assert('substr(__300WORDS_SITE_URL__, -1) === "/"');
 
+// organization name
+define('__300WORDS_ORG_NAME__', 'MaxXSoft');
+
 // root directory
 define('__300WORDS_ROOT_DIR__', __DIR__);
 
