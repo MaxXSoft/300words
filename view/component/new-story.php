@@ -1,7 +1,7 @@
 <?php $this->setPrompt(array(
   "起个标题吗？\n<i>{num}</i>月是<i>{somebody}</i>的<i>{something}</i>",
   "起个标题吗？\n<i>{somebody}</i>与<i>{somebody}</i>之间的惨烈修罗场",
-  "起个标题吗？\n<i>{somebody}</i>也要{do something}",
+  "起个标题吗？\n<i>{somebody}</i>也要<i>{do something}</i>",
   "起个标题吗？\n从零开始的<i>{something}</i>",
   "起个标题吗？\n进击的<i>{somebody}</i>",
   "起个标题吗？\n魔法少女<i>{somebody}</i>",
@@ -9,7 +9,7 @@
   "起个标题吗？\n我的<i>{somebody}</i>不可能这么<i>{adjective}</i>",
   "起个标题吗？\n只有<i>{somebody}</i>知道的世界",
   "起个标题吗？\n欢迎来到<i>{something}</i>至上主义的<i>{somewhere}</i>",
-  "起个标题吗？\n{do something}吧！<i>{somebody}</i>",
+  "起个标题吗？\n<i>{do something}</i>吧！<i>{somebody}</i>",
   //
   "不被发现就不算犯罪哦",
   "画个圈圈诅咒你 >.<",
