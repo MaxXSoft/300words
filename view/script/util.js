@@ -20,9 +20,10 @@ const checkUsername = (username) => {
 
 // get difference between dates as a string
 const getDateDiff = (date) => {
+  // parse date
+  let [y, m, d, hh, mm, ss] = date.split(/[-:\s]/g)
   // get target date (which time is set to zero)
-  let target = new Date(date)
-  target.setHours(0, 0, 0, 0)
+  let target = new Date(y, parseInt(m) - 1, d)
   // calculate difference
   let now = new Date()
   now.setHours(0, 0, 0, 0)
@@ -30,9 +31,8 @@ const getDateDiff = (date) => {
   let diffDay = Math.floor(diff / (1000 * 60 * 60 * 24))
   // get result
   if (diffDay == 0) {
-    let d = new Date(date)
-    let h = String(d.getHours()).padStart(2, '0')
-    let m = String(d.getMinutes()).padStart(2, '0')
+    let h = String(parseInt(hh)).padStart(2, '0')
+    let m = String(parseInt(mm)).padStart(2, '0')
     return diffPrompt.today.replace('%s', `${h}:${m}`)
   }
   else if (diffDay == 1) {
