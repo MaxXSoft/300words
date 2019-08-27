@@ -265,13 +265,6 @@ const getRootListInfo = async (vm) => {
   const url = `${apiUrl}root/${vm.posts.length}/${postInitCount}`
   let json = await fetchJsonAsync(url)
   let posts = !json.error ? json.response : []
-  // get branch & comment count
-  for (const i of posts) {
-    let json = await fetchJsonAsync(`${apiUrl}childcount/${i.id}`)
-    i.branchCount = !json.error ? json.response : 0
-    json = await fetchJsonAsync(`${apiUrl}commentcount/${i.id}/1`)
-    i.commentCount = !json.error ? json.response : 0
-  }
   // update post info
   vm.posts = vm.posts.concat(posts)
 }
@@ -290,15 +283,6 @@ const getPostListInfo = async (vm, isLatest = false) => {
   const url = `${apiUrl}${arg1}/${vm.posts.length}/${postInitCount}`
   let json = await fetchJsonAsync(url)
   let posts = !json.error ? json.response : []
-  // get branch & comment count
-  if (isLatest) {
-    for (const i of posts) {
-      let json = await fetchJsonAsync(`${apiUrl}childcount/${i.id}`)
-      i.branchCount = !json.error ? json.response : 0
-      json = await fetchJsonAsync(`${apiUrl}commentcount/${i.id}/1`)
-      i.commentCount = !json.error ? json.response : 0
-    }
-  }
   // update post info
   vm.posts = vm.posts.concat(posts)
 }
