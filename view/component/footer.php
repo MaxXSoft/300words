@@ -39,6 +39,7 @@
     const fromRoot = <?php $this->fromRoot(); ?>
 
   </script>
+  <script src="https://unpkg.com/v-tooltip"></script>
   <script src="<?php $this->script('util.js'); ?>"></script>
   <script src="<?php $this->script('control.js'); ?>"></script>
   <script src="<?php $this->script('textarea-autosize.js'); ?>"></script>
