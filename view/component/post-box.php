@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="post-branch" v-else-if="showSubform == 2 && branchCount" key="subform-2">
+      <div class="post-branch" id="post-branch" v-else-if="showSubform == 2 && branchCount" key="subform-2">
         <?php $this->need('form-branch.php'); ?>
       </div>
       <div class="post-branch empty" v-else-if="showSubform == 2 && !branchCount">
