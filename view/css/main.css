@@ -63,6 +63,12 @@ a:hover {
   color: #008120;
 }
 
+@media only screen and (max-width: 620px) {
+  #site-name {
+    display: none;
+  }
+}
+
 #tab-container {
   height: 100%;
   margin-left: 10px;
