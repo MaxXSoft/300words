@@ -1,6 +1,6 @@
 <div id="top-container">
   <div id="header">
-    <div id="logo"></div>
+    <a href="<?php $this->url(''); ?>"><div id="logo"></div></a>
     <div id="site-name">300字</div>
     <div id="tab-container">
     <?php
